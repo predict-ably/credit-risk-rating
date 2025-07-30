@@ -1,0 +1,199 @@
+[project]
+name = "predictably_core"
+version = "0.1.0"
+description = "Enabling dependable credit risk analytics"
+authors = [
+    {name = "Ryan Kuhns", email = "predictably.ai@gmail.com"},
+]
+maintainers = [
+    {name = "Ryan Kuhns", email = "predictably.ai@gmail.com"},
+]
+readme = "README.md"
+keywords = [
+    "data-science",
+    "machine-learning",
+    "object-oriented-programming",
+]
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python",
+    "Topic :: Software Development",
+    "Topic :: Scientific/Engineering",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX",
+    "Operating System :: Unix",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+requires-python = ">=3.9,<3.14"
+dependencies = ["typing-extensions"]
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit",
+    "pytest",
+    "pytest-cov",
+]
+
+linters = [
+    "mypy",
+    "numpydoc",
+    "ruff".
+    "pydocstyle",
+    "nbqa",
+    "pep8-naming",
+    "doc8",
+    "bandit",
+    "safety",
+]
+
+docs = [
+    "myst-parser",
+    "numpydoc",
+    "pydata-sphinx-theme",
+    "sphinx",
+    "sphinx-copybutton",
+    "sphinx-design",
+    "sphinx-issues",
+    "charset-normalizer<3.3",
+]
+
+test = [
+    "pytest",
+    "coverage",
+    "pytest-cov",
+    "joblib",
+    "numpy",
+    "pandas",
+    "polars",
+    "pyarrow",
+    "scikit-learn",
+    "scipy",
+    "xarray"
+]
+
+[project.urls]
+homepage = "https://github.com/predict-ably/credit-risk-rating"
+repository = "https://github.com/predict-ably/credit-risk-rating"
+documentation = "https://credit-risk-rating.readthedocs.io/en/latest/"
+download = "https://pypi.org/project/credit-risk-rating/#files"
+
+[project.license]
+file = "LICENSE"
+
+[build-system]
+requires = ["setuptools>61", "wheel", "toml", "build"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+# ignore certain folders
+addopts = [
+    "--doctest-modules",
+    "--ignore=docs",
+    "--cov=.",
+    "--cov-report=xml",
+    "--cov-report=html",
+]
+
+[tool.pydocstyle]
+convention = "numpy"
+
+[tool.ruff]
+line-length = 88
+indent-width = 4
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "I",
+    "B",
+    "N",
+    "A",
+    "D",
+    "Q",
+    "UP",
+    "SIM",
+    "W",
+    "S",
+    "C4",
+    "T20",
+    "PTH",
+    "RUF",
+]
+ignore = ["D413", "W191"]
+unfixable = ["B"]
+preview = true
+
+[tool.ruff.lint.per-file-ignores]
+"**/tests/*.py" = ["S101"]
+
+[tool.ruff.format]
+# Setup to format like black
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+docstring-code-line-length = "dynamic"
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.flake8-quotes]
+docstring-quotes = "double"
+
+[tool.coverage.report]
+show_missing = true
+ignore_errors = true
+precision = 2
+
+[tool.coverage.run]
+source = ["predictably"]
+omit = [
+    "*/setup.py",
+    "*/tests/*",
+    "docs/*",
+    "predictably/tests/*",
+    "predictably/_core/_pprint/*"
+]
+
+[tool.doc8]
+max-line-length = 88
+ignore = ["D004"]
+ignore_path = ["docs/_build", "docs/source/api_reference/auto_generated"]
+
+[tool.bandit]
+exclude_dirs = ["**/tests/*", "**/testing/*"]
+
+[tool.numpydoc_validation]
+checks = ["all", "GL01", "SA01", "EX01"]
+exclude = [
+    "\\.*tests.*",
+    "\\.__init__$",
+    "__init__$",
+    ".*tests.*",
+]
+
+[tool.setuptools]
+zip-safe = true
+
+[tool.setuptools.package-data]
+predictably = [
+    "*.csv",
+    "*.csv.gz",
+    "*.arff",
+    "*.arff.gz",
+    "*.txt",
+    "*.ts",
+    "*.tsv",
+]
+
+[tool.setuptools.packages.find]
+exclude = ["tests", "tests.*"]
