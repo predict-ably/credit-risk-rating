@@ -1,2 +1,2 @@
 # credit-risk-rating
-A Python package for 
+A Python package for
